@@ -39,10 +39,7 @@ public class FileHelper
         }
         Parallel.ForEach(Files, file =>
          {
-             var fileName = file.Name;
-             var extension = file.Extension;
-             var copyFileName = fileName.Replace(extension, $"Copy{extension}");
-             var newPathFile = $"{newPath}\\{copyFileName}";
+           var newPathFile = _createCopyFileName(file, newPath);
 
              if (File.Exists(newPathFile))
                  File.Delete(newPathFile);
