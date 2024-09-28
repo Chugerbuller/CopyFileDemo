@@ -24,10 +24,12 @@ public class FileHelper
         }
         foreach (var file in Files)
         {
-            var fileName = file.Name; // test.txt testCopy.txt
-            var extension = file.Extension;
-            var copyFileName = fileName.Replace(extension, $"Copy{extension}");
-            file.CopyTo($"{newPath}\\{copyFileName}");
+             var newPathFile = _createCopyFileName(file, newPath);
+
+             if (File.Exists(newPathFile))
+                File.Delete(newPathFile);
+
+             file.CopyTo($"{newPathFile}");
         }
     }
 
